@@ -10,3 +10,4 @@ npm install
 npm run dev
 ``` 
 3. localhost:8000 에서 페이지 잘 뜨는지 확인
+.
