@@ -6,22 +6,30 @@ import Post from './pages/Post';
 import Resume from './pages/Resume';
 import Write from './pages/Write';
 import Header from './components/Header';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <Router>
-      <Routes>
-        <Route element={<Header />}>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/resume" element={<Resume />} />
-          </Route>
-          <Route path="/posts/:postId" element={<Post />} />
-        </Route>
-        {/*todo (5-1) Write 추가*/}
-      </Routes>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
+      <Router basename={'/CNU_Blog/'}>
+        <Router>
+          <Routes>
+            <Route element={<Header />}>
+              <Route element={<Layout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/resume" element={<Resume />} />
+              </Route>
+              <Route path="/posts/:postId" element={<Post />} />
+            </Route>
+            <Route path="/write" element={<Write />} />
+          </Routes>
+        </Router>
+      </Router>
+    </QueryClientProvider>
   );
 }
-
 export default App;
